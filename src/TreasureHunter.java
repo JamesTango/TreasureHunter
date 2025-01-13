@@ -16,8 +16,6 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
-    private boolean testMode;
-
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -33,6 +31,7 @@ public class TreasureHunter {
      */
     public void play() {
         welcomePlayer();
+
         enterTown();
         showMenu();
     }
@@ -55,13 +54,13 @@ public class TreasureHunter {
             hardMode = true;
             hunter = new Hunter(name, 20);
         } else if (hard.equals("test")){
-            testMode = true;
-            hunter = new Hunter(name, 100);
-            hunter.buyItem("Water", 0);
-            hunter.buyItem("Rope", 0);
-            hunter.buyItem("Machete", 0);
-            hunter.buyItem("Horse", 0);
-            hunter.buyItem("Boat", 0);
+            hunter = new Hunter(name, 106);
+            hunter.buyItem("water", 1);
+            hunter.buyItem("rope", 1);
+            hunter.buyItem("machete", 1);
+            hunter.buyItem("horse", 1);
+            hunter.buyItem("boat", 1);
+            hunter.buyItem("boots", 1);
         } else {
             hunter = new Hunter(name, 20);
         }
