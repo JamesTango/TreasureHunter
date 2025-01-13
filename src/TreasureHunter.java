@@ -106,12 +106,13 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
-            if (!hunter.getBankruptcy()) {
+
+            System.out.println();
+            System.out.println(currentTown.getLatestNews());
+            if (hunter.getBankruptcy()) {
                 System.out.println("GameOver");
                 break;
             }
-            System.out.println();
-            System.out.println(currentTown.getLatestNews());
             System.out.println("***");
             System.out.println(hunter.infoString());
             System.out.println(currentTown.infoString());

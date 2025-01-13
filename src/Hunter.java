@@ -35,7 +35,7 @@ public class Hunter {
     public void changeGold(int modifier) {
         gold += modifier;
         if (gold < 0) {
-
+            bankrupt = true;
         }
     }
     public boolean getBankruptcy() {
@@ -133,7 +133,7 @@ public class Hunter {
 
         for (String item : kit) {
             if (item != null) {
-                printableKit += item + Colors.PURPLE + space;
+                printableKit += Colors.PURPLE + item + Colors.RESET + space;
             }
         }
         return printableKit;
@@ -143,7 +143,7 @@ public class Hunter {
      * @return A string representation of the hunter.
      */
     public String infoString() {
-        String str = hunterName + " has " + gold + Colors.YELLOW + " gold";
+        String str = hunterName + " has " +Colors.YELLOW + gold +  Colors.RESET+" gold" ;
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }
