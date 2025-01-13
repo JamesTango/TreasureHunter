@@ -9,7 +9,7 @@ public class Hunter {
     private String hunterName;
     private String[] kit;
     private int gold;
-
+    boolean bankrupt = false;
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *
@@ -35,8 +35,11 @@ public class Hunter {
     public void changeGold(int modifier) {
         gold += modifier;
         if (gold < 0) {
-            gold = 0;
+
         }
+    }
+    public boolean getBankruptcy() {
+        return bankrupt;
     }
 
     /**
@@ -130,7 +133,7 @@ public class Hunter {
 
         for (String item : kit) {
             if (item != null) {
-                printableKit += item + space;
+                printableKit += item + Colors.PURPLE + space;
             }
         }
         return printableKit;
@@ -140,7 +143,7 @@ public class Hunter {
      * @return A string representation of the hunter.
      */
     public String infoString() {
-        String str = hunterName + " has " + gold + " gold";
+        String str = hunterName + " has " + gold + Colors.YELLOW + " gold";
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }

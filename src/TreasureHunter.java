@@ -35,6 +35,7 @@ public class TreasureHunter {
         welcomePlayer();
         enterTown();
         showMenu();
+
     }
 
     /**
@@ -106,6 +107,10 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
+            if (!hunter.getBankruptcy()) {
+                System.out.println("GameOver");
+                break;
+            }
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
