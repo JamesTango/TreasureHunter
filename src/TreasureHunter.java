@@ -161,11 +161,10 @@ public class TreasureHunter {
                     System.out.println("You dug but only found dirt");
                 }
                 currentTown.setTownDug();
+            } else if (currentTown.getTownDug()) {
+                System.out.println(Colors.RED + "You already dug for gold in this town." + Colors.RESET);
             } else {
                 System.out.println(Colors.RED +"You can't dig for gold without a shovel TRY GOING TO THE SHOP TO BUY THE SHOVEL" + Colors.RESET);
-            }
-            if (currentTown.getTownDug()) {
-                System.out.println(Colors.RED + "You already dug for gold in this town." + Colors.RESET);
             }
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
