@@ -188,6 +188,14 @@ public class Hunter {
         return str;
     }
 
+    public int emptyPositionInTreasures() {
+        for (int i = 0; i < treasures.length; i++) {
+            if (treasures[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
     /**
      * Searches kit Array for the index of the specified value.
      *
@@ -236,15 +244,6 @@ public class Hunter {
     private int emptyPositionInKit() {
         for (int i = 0; i < kit.length; i++) {
             if (kit[i] == null) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private int emptyPositionInTreasures() {
-        for (int i = 0; i < treasures.length; i++) {
-            if (treasures[i] == null) {
                 return i;
             }
         }

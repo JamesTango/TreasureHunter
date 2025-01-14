@@ -113,6 +113,10 @@ public class TreasureHunter {
                 System.out.println("GameOver");
                 break;
             }
+            if (hunter.emptyPositionInTreasures() == -1){
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                break;
+            }
             System.out.println("***");
             System.out.println(hunter.infoString());
             System.out.println(currentTown.infoString());
