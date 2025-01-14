@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Scanner;
 
 /**
  * The Town Class is where it all happens.
@@ -13,6 +14,7 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean TownDug = false;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -35,6 +37,14 @@ public class Town {
 
     public Terrain getTerrain() {
         return terrain;
+    }
+
+    public void setTownDug() {
+        TownDug = true;
+    }
+
+    public boolean getTownDug() {
+        return TownDug;
     }
 
     public String getLatestNews() {

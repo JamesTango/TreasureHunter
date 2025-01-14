@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -121,6 +123,7 @@ public class TreasureHunter {
             System.out.println("(E)xplore surrounding terrain.");
             System.out.println("(M)ove on to a different town.");
             System.out.println("(L)ook for trouble!");
+            System.out.println("(D)ig for gold");
             System.out.println("Give up the hunt and e(X)it.");
             System.out.println();
             System.out.print("What's your next move? ");
@@ -148,6 +151,22 @@ public class TreasureHunter {
             currentTown.lookForTrouble();
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+        } else if (choice.equals("d")) {
+            if (hunter.hasItemInKit("shovel") && !currentTown.getTownDug() ) {
+                if (Math.random() > 0.5) {
+                    int goldDigged = (int)(Math.random() * 21);
+                    System.out.println("you dug up " + Colors.YELLOW + goldDigged + Colors.RESET);
+                    hunter.changeGold(goldDigged);
+                } else {
+                    System.out.println("You dug but only found dirt");
+                }
+                currentTown.setTownDug();
+            } else {
+                System.out.println(Colors.RED +"You can't dig for gold without a shovel TRY GOING TO THE SHOP TO BUY THE SHOVEL" + Colors.RESET);
+            }
+            if (currentTown.getTownDug()) {
+                System.out.println(Colors.RED + "You already dug for gold in this town." + Colors.RESET);
+            }
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
