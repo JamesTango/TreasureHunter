@@ -8,8 +8,9 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+    private String[] treasures;
     private int gold;
-    boolean bankrupt = false;
+    private boolean bankrupt = false;
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *
@@ -19,6 +20,7 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
         kit = new String[6]; // only 5 possible items can be stored in kit
+        treasures = new String[3];
         gold = startingGold;
     }
 
@@ -96,7 +98,7 @@ public class Hunter {
      * @param item The item to be added to the kit.
      * @return true if the item is not in the kit and has been added.
      */
-    public boolean addItem(String item) {
+    private boolean addItem(String item) {
         if (!hasItemInKit(item)) {
             int idx = emptyPositionInKit();
             kit[idx] = item;
@@ -104,6 +106,16 @@ public class Hunter {
         }
         return false;
     }
+
+    public boolean addTreasure(String treasure) {
+        if (!hasTreasureInTreasures(treasure)) {
+            int idx = emptyPositionInTreasures();
+            treasures[idx] = treasure;
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Checks if the kit Array has the specified item.
@@ -115,6 +127,14 @@ public class Hunter {
         for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
                 // early return
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasTreasureInTreasures(String treasure) {
+        for (String tmpTreasure: treasures) {
+            if (treasure.equals(tmpTreasure)) {
                 return true;
             }
         }
@@ -189,6 +209,15 @@ public class Hunter {
     private int emptyPositionInKit() {
         for (int i = 0; i < kit.length; i++) {
             if (kit[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int emptyPositionInTreasures() {
+        for (int i = 0; i < treasures.length; i++) {
+            if (treasures[i] == null) {
                 return i;
             }
         }

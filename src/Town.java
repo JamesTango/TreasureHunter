@@ -13,6 +13,8 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean searched;
+    private String treasure;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -28,9 +30,20 @@ public class Town {
         // gets called from a client class
         hunter = null;
         printMessage = "";
-
+        searched = false;
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+
+        double chance = Math.random();
+        if (chance > 0.5){
+            treasure = Colors.BLACK + "dust" + Colors.RESET;
+        } else if (chance > 0.5 - 0.5/3){
+            treasure = Colors.YELLOW + "crown" + Colors.RESET;
+        } else if (chance > 0.5 - 1.0/3){
+            treasure = Colors.RED + "trophy" + Colors.RESET;
+        } else {
+            treasure = Colors.BLUE + "gem" + Colors.RESET;
+        }
     }
 
     public Terrain getTerrain() {
@@ -111,6 +124,21 @@ public class Town {
                 printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
                 printMessage += "\nYou lost the brawl and pay " + Colors.RED + goldDiff + Colors.RESET + " gold.";
                 hunter.changeGold(-goldDiff);
+            }
+        }
+    }
+
+    public void searchTown(){
+        if (searched){
+            printMessage = "You have already searched this town!";
+        } else{
+            searched = true;
+            if (treasure.equals(Colors.BLACK + "dust" + Colors.RESET)){
+                printMessage = "You found " + treasure + " womp womp";
+            } else if (hunter.addTreasure(treasure)){
+                printMessage = "You found " + treasure + "!";
+            } else {
+                printMessage = "You have already found a " + treasure;
             }
         }
     }
