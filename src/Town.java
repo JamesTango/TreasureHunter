@@ -15,6 +15,7 @@ public class Town {
     private String printMessage;
     private boolean toughTown;
     private boolean TownDug = false;
+    private boolean EasyMode = false;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -22,9 +23,12 @@ public class Town {
      * @param shop The town's shoppe.
      * @param toughness The surrounding terrain.
      */
-    public Town(Shop shop, double toughness) {
+
+    public Town(Shop shop, double toughness, boolean EasyMode) {
         this.shop = shop;
         this.terrain = getNewTerrain();
+
+        this.EasyMode = EasyMode;
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
@@ -157,6 +161,9 @@ public class Town {
      * @return true if the item broke.
      */
     private boolean checkItemBreak() {
+        if (EasyMode) {
+            return false;
+        }
         double rand = Math.random();
         return (rand < 0.5);
     }
