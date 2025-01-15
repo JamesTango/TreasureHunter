@@ -55,6 +55,9 @@ public class Shop {
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
+                    if (customer.getHunterSamuraiMode()) {
+                        System.out.println("the sword's aura scared the shopkeeper and he gives you the item freely");
+                    }
                     buyItem(item);
                 }
             }
