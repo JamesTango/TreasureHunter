@@ -89,7 +89,7 @@ public class Shop {
         str += "Horse: " + HORSE_COST + " gold\n";
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
-        str += "Shovel: " + SHOVEL_COST +  "gold\n";
+        str += "Shovel: " + SHOVEL_COST +  " gold\n";
         if (customer.getHunterSamuraiMode()) {
             str += "Sword: " + 0 + " gold\n";
         }

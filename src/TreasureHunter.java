@@ -55,7 +55,7 @@ public class TreasureHunter {
         // set hunter instance variable
 
 
-        System.out.print("Hard(h),Normal(n),Easy(e),Samurai(s) or test(test): ");
+        System.out.print("Hard(h), Normal(n), Easy(e), or test(test): ");
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("h")) {
             hardMode = true;
