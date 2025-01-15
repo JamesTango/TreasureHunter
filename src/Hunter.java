@@ -11,7 +11,7 @@ public class Hunter {
     private String[] treasures;
     private int gold;
     private boolean bankrupt = false;
-    private boolean SamuraiMode = false;
+    private boolean SamuraiMode;
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *

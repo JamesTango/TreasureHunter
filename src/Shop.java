@@ -56,7 +56,7 @@ public class Shop {
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
                     if (customer.getHunterSamuraiMode()) {
-                        System.out.println("the sword's aura scared the shopkeeper and he gives you the item freely");
+                        System.out.println("The sword's aura scared the shopkeeper and he gives you the item for free.");
                     }
                     buyItem(item);
                 }
