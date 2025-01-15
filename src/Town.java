@@ -17,6 +17,7 @@ public class Town {
     private String treasure;
     private boolean TownDug = false;
     private boolean EasyMode = false;
+    private boolean winBrawl;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -66,6 +67,10 @@ public class Town {
     public String getLatestNews() {
         return printMessage;
     }
+
+    public void setLatestNews(String message) {printMessage = message;}
+
+    public boolean getWinBrawl() {return winBrawl;}
 
     /**
      * Assigns an object to the Hunter in town.
@@ -134,13 +139,16 @@ public class Town {
             printMessage = Colors.RED + "You want trouble, stranger! You got it! " + Colors.RESET;
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (hunter.hasItemInKit("sword")){
+              winBrawl = true;
               printMessage += Colors.RED + "\nSorry, please forgive me." + Colors.RESET;
-                printMessage += "\nThe brawler, seeing your sword surrendered. They gave you " + Colors.YELLOW + goldDiff + Colors.RESET+ " gold.";
+              printMessage += "\nThe brawler, seeing your sword surrendered. They gave you " + Colors.YELLOW + goldDiff + Colors.RESET+ " gold.";
             } else if (Math.random() > noTroubleChance) {
+                winBrawl = true;
                 printMessage += Colors.RED +"\nOof! Umph! Ow!\nOkay, stranger! You proved yer mettle. Here, take my gold."+ Colors.RESET;
                 printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET+ " gold.";
                 hunter.changeGold(goldDiff);
             } else {
+                winBrawl = false;
                 printMessage += Colors.RED + "\nOof! Umph! Ow!\nThat'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
                 printMessage += "\nYou lost the brawl and pay " + Colors.RED + goldDiff + Colors.RESET + " gold.";
                 hunter.changeGold(-goldDiff);

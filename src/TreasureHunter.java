@@ -20,6 +20,7 @@ public class TreasureHunter {
     private boolean hardMode;
     private boolean easyMode;
     private boolean samuraiMode;
+    private boolean brawlLatest;
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -128,9 +129,18 @@ public class TreasureHunter {
         while (!choice.equals("x")) {
 
             System.out.println();
-            System.out.println(currentTown.getLatestNews());
+            if (brawlLatest){
+                System.out.println(currentTown.getLatestNews());
+                if (currentTown.getWinBrawl()){
+                    currentTown.setLatestNews("You won a brawl.");
+                } else {
+                    currentTown.setLatestNews("You lost a brawl.");
+                }
+            }else {
+                System.out.println(currentTown.getLatestNews());
+            }
             if (hunter.getBankruptcy()) {
-                System.out.println("GameOver");
+                System.out.println("Game Over");
                 break;
             }
             if (hunter.emptyPositionInTreasures() == -1){
@@ -161,18 +171,22 @@ public class TreasureHunter {
      */
     private void processChoice(String choice) {
         if (choice.equals("b") || choice.equals("s")) {
+            brawlLatest = false;
             currentTown.enterShop(choice);
         } else if (choice.equals("e")) {
             System.out.println(currentTown.getTerrain().infoString());
         } else if (choice.equals("m")) {
+            brawlLatest = false;
             if (currentTown.leaveTown()) {
                 // This town is going away so print its news ahead of time.
                 System.out.println(currentTown.getLatestNews());
                 enterTown();
             }
         } else if (choice.equals("l")) {
+            brawlLatest = true;
             currentTown.lookForTrouble();
         } else if (choice.equals("h")){
+            brawlLatest = false;
             currentTown.searchTown();
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
