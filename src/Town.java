@@ -90,7 +90,11 @@ public class Town {
     public boolean leaveTown() {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
-            String item = terrain.getNeededItem();
+            String item = terrain.getNeededItem();;
+            if (terrain.getTerrainName() == "Jungle" && hunter.hasItemInKit("sword")) {
+                item = "sword";
+            }
+
             printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
