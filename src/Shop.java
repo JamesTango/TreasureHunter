@@ -90,6 +90,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST +  "gold\n";
+        if (customer.getHunterSamuraiMode()) {
+            str += "Sword: " + 0 + " gold\n";
+        }
         return str;
     }
 
@@ -143,6 +146,11 @@ public class Shop {
      * @return The cost of the item or 0 if the item is not found.
      */
     public int getCostOfItem(String item) {
+        if (customer.getHunterSamuraiMode()) {
+            if (item.equals("sword")) {
+                return 0;
+            }
+        }
         if (item.equals("water")) {
             return WATER_COST;
         } else if (item.equals("rope")) {

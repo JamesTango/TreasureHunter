@@ -11,15 +11,24 @@ public class Hunter {
     private String[] treasures;
     private int gold;
     private boolean bankrupt = false;
+    private boolean SamuraiMode = false;
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
      *
      * @param hunterName The hunter's name.
      * @param startingGold The gold the hunter starts with.
      */
-    public Hunter(String hunterName, int startingGold) {
+
+
+    public Hunter(String hunterName, int startingGold, boolean SamuraiMode) {
         this.hunterName = hunterName;
-        kit = new String[6]; // only 5 possible items can be stored in kit
+        this.SamuraiMode = SamuraiMode;
+        if (SamuraiMode) {
+            kit = new String[8]; // only 5 possible items can be stored in kit
+        } else {
+            kit = new String[7]; // only 5 possible items can be stored in kit
+        }
+
         treasures = new String[3];
         gold = startingGold;
     }
@@ -27,6 +36,9 @@ public class Hunter {
     //Accessors
     public String getHunterName() {
         return hunterName;
+    }
+    public boolean getHunterSamuraiMode() {
+        return SamuraiMode;
     }
 
     /**
