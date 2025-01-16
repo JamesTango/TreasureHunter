@@ -130,7 +130,7 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
-            window.clear();
+
             window.addTextToWindow("\n", Color.black);
             if (brawlLatest){
                 window.addTextToWindow(currentTown.getLatestNews(), Color.black);
