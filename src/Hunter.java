@@ -6,6 +6,7 @@
 
 public class Hunter {
     //instance variables
+    private OutputWindow window;
     private String hunterName;
     private String[] kit;
     private String[] treasures;
@@ -20,7 +21,7 @@ public class Hunter {
      */
 
 
-    public Hunter(String hunterName, int startingGold, boolean SamuraiMode) {
+    public Hunter(String hunterName, int startingGold, boolean SamuraiMode,OutputWindow window) {
         this.hunterName = hunterName;
         this.SamuraiMode = SamuraiMode;
         if (SamuraiMode) {
@@ -31,6 +32,11 @@ public class Hunter {
 
         treasures = new String[3];
         gold = startingGold;
+        this.window = window;
+    }
+
+    public OutputWindow GetWindow() {
+        return window;
     }
 
     //Accessors
@@ -169,7 +175,7 @@ public class Hunter {
 
         for (String item : kit) {
             if (item != null) {
-                printableKit += Colors.PURPLE + item + Colors.RESET + space;
+                printableKit += item  + space;
             }
         }
         return printableKit;
@@ -191,7 +197,7 @@ public class Hunter {
      * @return A string representation of the hunter.
      */
     public String infoString() {
-        String str = hunterName + " has " +Colors.YELLOW + gold +  Colors.RESET+" gold" ;
+        String str = hunterName + " has "  + gold +" gold" ;
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }

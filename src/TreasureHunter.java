@@ -21,6 +21,10 @@ public class TreasureHunter {
     private boolean easyMode;
     private boolean samuraiMode;
     private boolean brawlLatest;
+
+    OutputWindow window = new OutputWindow(); // only want one OutputWindow object
+    Scanner scan = new Scanner(System.in);
+
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -48,21 +52,20 @@ public class TreasureHunter {
      * Creates a hunter object at the beginning of the game and populates the class member variable with it.
      */
     private void welcomePlayer() {
-        System.out.println("Welcome to TREASURE HUNTER!");
-        System.out.println("Going hunting for the big treasure, eh?");
-        System.out.print("What's your name, Hunter? ");
+        window.addTextToWindow("\nWelcome to TREASURE HUNTER!", Color.black);
+        window.addTextToWindow("\nGoing hunting for the big treasure, eh?", Color.black);
+        window.addTextToWindow("\nWhat's your name, Hunter?", Color.black);
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
 
-
-        System.out.print("Hard(h), Normal(n), Easy(e), or test(test): ");
+        window.addTextToWindow("\nHard(h), Normal(n), Easy(e), or test(test): ", Color.black);
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("h")) {
             hardMode = true;
-            hunter = new Hunter(name, 20,samuraiMode);
+            hunter = new Hunter(name, 20,samuraiMode,  window);
         } else if (hard.equals("test")) {
-            hunter = new Hunter(name, 106,samuraiMode);
+            hunter = new Hunter(name, 106,samuraiMode,  window);
             hunter.buyItem("water", 1);
             hunter.buyItem("rope", 1);
             hunter.buyItem("machete", 1);
@@ -71,12 +74,12 @@ public class TreasureHunter {
             hunter.buyItem("boots", 1);
         } else if (hard.equals("e")) {
             easyMode = true;
-            hunter = new Hunter(name, 40,samuraiMode);
+            hunter = new Hunter(name, 40,samuraiMode, window);
         } else if (hard.equals("s")){
             samuraiMode = true;
-            hunter = new Hunter(name,40,samuraiMode);
+            hunter = new Hunter(name,40,samuraiMode, window);
         } else {
-            hunter = new Hunter(name, 20,samuraiMode);
+            hunter = new Hunter(name, 20,samuraiMode, window);
         }
     }
 
@@ -127,39 +130,40 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
-
-            System.out.println();
+            window.clear();
+            window.addTextToWindow("\n", Color.black);
             if (brawlLatest){
-                System.out.println(currentTown.getLatestNews());
+                window.addTextToWindow(currentTown.getLatestNews(), Color.black);
                 if (currentTown.getWinBrawl()){
-                    currentTown.setLatestNews("You won a brawl.");
+                    currentTown.setLatestNews("\nYou won a brawl.");
                 } else {
-                    currentTown.setLatestNews("You lost a brawl.");
+                    currentTown.setLatestNews("\nYou lost a brawl.");
                 }
             }else {
-                System.out.println(currentTown.getLatestNews());
+                window.addTextToWindow(currentTown.getLatestNews(), Color.black);
             }
             if (hunter.getBankruptcy()) {
-                System.out.println("Game Over");
+                window.addTextToWindow("\nGame Over", Color.red);
                 break;
             }
             if (hunter.emptyPositionInTreasures() == -1){
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                window.addTextToWindow("\nCongratulations, you have found the last of the three treasures, you win!", Color.green);
                 break;
             }
-            System.out.println("***");
-            System.out.println(hunter.infoString());
-            System.out.println(currentTown.infoString());
-            System.out.println("(B)uy something at the shop.");
-            System.out.println("(S)ell something at the shop.");
-            System.out.println("(E)xplore surrounding terrain.");
-            System.out.println("(H)unt for treasure in the town.");
-            System.out.println("(M)ove on to a different town.");
-            System.out.println("(L)ook for trouble!");
-            System.out.println("(D)ig for gold");
-            System.out.println("Give up the hunt and e(X)it.");
-            System.out.println();
-            System.out.print("What's your next move? ");
+            window.addTextToWindow("\n***", Color.black);
+            window.addTextToWindow(hunter.infoString(), Color.black);
+            window.addTextToWindow(currentTown.infoString(), Color.black);
+            window.addTextToWindow("\n(B)uy something at the shop.", Color.black);
+            window.addTextToWindow("\n(S)ell something at the shop.", Color.black);
+            window.addTextToWindow("\n(E)xplore surrounding terrain.", Color.black);
+            window.addTextToWindow("\n(H)unt for treasure in the town.", Color.black);
+            window.addTextToWindow("\n(M)ove on to a different town.", Color.black);
+            window.addTextToWindow("\n(L)ook for trouble!", Color.black);
+            window.addTextToWindow("\n(D)ig for gold", Color.black);
+            window.addTextToWindow("\nGive up the hunt and e(X)it.", Color.black);
+            window.addTextToWindow("\n", Color.black);
+            window.addTextToWindow("\nWhat's your next move? ", Color.black);
+
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
         }
@@ -170,16 +174,17 @@ public class TreasureHunter {
      * @param choice The action to process.
      */
     private void processChoice(String choice) {
+        window.clear();
         if (choice.equals("b") || choice.equals("s")) {
             brawlLatest = false;
             currentTown.enterShop(choice);
         } else if (choice.equals("e")) {
-            System.out.println(currentTown.getTerrain().infoString());
+            window.addTextToWindow(currentTown.getTerrain().infoString(), Color.black);
         } else if (choice.equals("m")) {
             brawlLatest = false;
             if (currentTown.leaveTown()) {
                 // This town is going away so print its news ahead of time.
-                System.out.println(currentTown.getLatestNews());
+                window.addTextToWindow(currentTown.getLatestNews(), Color.black);
                 enterTown();
             }
         } else if (choice.equals("l")) {
@@ -189,24 +194,24 @@ public class TreasureHunter {
             brawlLatest = false;
             currentTown.searchTown();
         } else if (choice.equals("x")) {
-            System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+            window.addTextToWindow("\nFare thee well, " + hunter.getHunterName() + "!", Color.black);
         } else if (choice.equals("d")) {
             if (hunter.hasItemInKit("shovel") && !currentTown.getTownDug() ) {
                 if (Math.random() > 0.5) {
                     int goldDigged = (int)(Math.random() * 21);
-                    System.out.println("you dug up " + Colors.YELLOW + goldDigged + Colors.RESET);
+                    window.addTextToWindow("\nyou dug up " + goldDigged , Color.black);
                     hunter.changeGold(goldDigged);
                 } else {
-                    System.out.println("You dug but only found dirt");
+                    window.addTextToWindow("\nYou dug but only found dirt",Color.black);
                 }
                 currentTown.setTownDug();
             } else if (currentTown.getTownDug()) {
-                System.out.println(Colors.RED + "You already dug for gold in this town." + Colors.RESET);
+                window.addTextToWindow("\nYou already dug for gold in this town.",Color.red);
             } else {
-                System.out.println(Colors.RED +"You can't dig for gold without a shovel TRY GOING TO THE SHOP TO BUY THE SHOVEL" + Colors.RESET);
+                window.addTextToWindow("\nYou can't dig for gold without a shovel TRY GOING TO THE SHOP TO BUY THE SHOVEL" ,Color.red);
             }
         } else {
-            System.out.println("Yikes! That's an invalid option! Try again.");
+            window.addTextToWindow("\nYikes! That's an invalid option! Try again.",Color.red);
         }
     }
 }

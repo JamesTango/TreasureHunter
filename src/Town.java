@@ -42,13 +42,13 @@ public class Town {
 
         double chance = Math.random();
         if (chance > 0.5){
-            treasure = Colors.BLACK + "dust" + Colors.RESET;
+            treasure ="dust" ;
         } else if (chance > 0.5 - 0.5/3){
-            treasure = Colors.YELLOW + "crown" + Colors.RESET;
+            treasure = "crown";
         } else if (chance > 0.5 - 1.0/3){
-            treasure = Colors.RED + "trophy" + Colors.RESET;
+            treasure = "trophy" ;
         } else {
-            treasure = Colors.BLUE + "gem" + Colors.RESET;
+            treasure =  "gem" ;
         }
     }
 
@@ -136,21 +136,21 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
-            printMessage = Colors.RED + "You want trouble, stranger! You got it! " + Colors.RESET;
+            printMessage =   "You want trouble, stranger! You got it! " ;
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (hunter.hasItemInKit("sword")){
               winBrawl = true;
-              printMessage += Colors.RED + "\nSorry, please forgive me." + Colors.RESET;
-              printMessage += "\nThe brawler, seeing your sword surrendered. They gave you " + Colors.YELLOW + goldDiff + Colors.RESET+ " gold.";
+              printMessage +=  "\nSorry, please forgive me.";
+              printMessage += "\nThe brawler, seeing your sword surrendered. They gave you "+ goldDiff + " gold.";
             } else if (Math.random() > noTroubleChance) {
                 winBrawl = true;
-                printMessage += Colors.RED +"\nOof! Umph! Ow!\nOkay, stranger! You proved yer mettle. Here, take my gold."+ Colors.RESET;
-                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET+ " gold.";
+                printMessage += "\nOof! Umph! Ow!\nOkay, stranger! You proved yer mettle. Here, take my gold.";
+                printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
                 hunter.changeGold(goldDiff);
             } else {
                 winBrawl = false;
-                printMessage += Colors.RED + "\nOof! Umph! Ow!\nThat'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
-                printMessage += "\nYou lost the brawl and pay " + Colors.RED + goldDiff + Colors.RESET + " gold.";
+                printMessage +=   "\nOof! Umph! Ow!\nThat'll teach you to go lookin' fer trouble in MY town! Now pay up!";
+                printMessage += "\nYou lost the brawl and pay "  + goldDiff + " gold.";
                 hunter.changeGold(-goldDiff);
             }
         }
@@ -161,7 +161,7 @@ public class Town {
             printMessage = "You have already searched this town!";
         } else{
             searched = true;
-            if (treasure.equals(Colors.BLACK + "dust" + Colors.RESET)){
+            if (treasure.equals("dust")){
                 printMessage = "You found " + treasure + " womp womp";
             } else if (hunter.addTreasure(treasure)){
                 printMessage = "You found " + treasure + "!";
