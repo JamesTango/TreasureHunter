@@ -8,6 +8,7 @@ public class Terrain {
     private String terrainName;
     private String neededItem;
 
+
     /**
      * Sets the class member variables
      *
