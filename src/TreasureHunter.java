@@ -55,11 +55,11 @@ public class TreasureHunter {
         window.addTextToWindow("\nWelcome to TREASURE HUNTER!", Color.black);
         window.addTextToWindow("\nGoing hunting for the big treasure, eh?", Color.black);
         window.addTextToWindow("\nWhat's your name, Hunter?", Color.black);
-        String name = SCANNER.nextLine().toLowerCase();
+        String name = SCANNER.nextLine();
 
         // set hunter instance variable
 
-        window.addTextToWindow("\nHard(h), Normal(n), Easy(e), or test(test): ", Color.black);
+        window.addTextToWindow("\nHard(h), Normal(n), Easy(e): ", Color.black);
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("h")) {
             hardMode = true;
@@ -150,7 +150,7 @@ public class TreasureHunter {
                 window.addTextToWindow("\nCongratulations, you have found the last of the three treasures, you win!", Color.green);
                 break;
             }
-            window.addTextToWindow("\n***", Color.black);
+            window.addTextToWindow("\n***\n", Color.black);
             window.addTextToWindow(hunter.infoString(), Color.black);
             window.addTextToWindow(currentTown.infoString(), Color.black);
             window.addTextToWindow("\n(B)uy something at the shop.", Color.black);
@@ -199,7 +199,7 @@ public class TreasureHunter {
             if (hunter.hasItemInKit("shovel") && !currentTown.getTownDug() ) {
                 if (Math.random() > 0.5) {
                     int goldDigged = (int)(Math.random() * 21);
-                    window.addTextToWindow("\nyou dug up " + goldDigged , Color.black);
+                    window.addTextToWindow("\nYou dug up " + goldDigged + " gold", Color.black);
                     hunter.changeGold(goldDigged);
                 } else {
                     window.addTextToWindow("\nYou dug but only found dirt",Color.black);

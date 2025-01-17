@@ -79,7 +79,7 @@ public class Town {
      */
     public void hunterArrives(Hunter hunter) {
         this.hunter = hunter;
-        printMessage = "Welcome to town, " + hunter.getHunterName() + ".";
+        printMessage = "\nWelcome to town, " + hunter.getHunterName() + ".";
         if (toughTown) {
             printMessage += "\nIt's pretty rough around here, so watch yourself.";
         } else {
@@ -100,7 +100,7 @@ public class Town {
                 item = "sword";
             }
 
-            printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
+            printMessage = "\nYou used your " + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
                 printMessage += "\nUnfortunately, you lost your " + item;
@@ -108,7 +108,7 @@ public class Town {
             return true;
         }
 
-        printMessage = "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
+        printMessage = "\nYou can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
         return false;
     }
 
@@ -134,9 +134,9 @@ public class Town {
             noTroubleChance = 0.33;
         }
         if (Math.random() > noTroubleChance) {
-            printMessage = "You couldn't find any trouble";
+            printMessage = "\nYou couldn't find any trouble";
         } else {
-            printMessage =   "You want trouble, stranger! You got it! " ;
+            printMessage =   "\nYou want trouble, stranger! You got it! " ;
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (hunter.hasItemInKit("sword")){
               winBrawl = true;
@@ -158,21 +158,21 @@ public class Town {
 
     public void searchTown(){
         if (searched){
-            printMessage = "You have already searched this town!";
+            printMessage = "\nYou have already searched this town!";
         } else{
             searched = true;
             if (treasure.equals("dust")){
-                printMessage = "You found " + treasure + " womp womp";
+                printMessage = "\nYou found " + treasure + " womp womp";
             } else if (hunter.addTreasure(treasure)){
-                printMessage = "You found " + treasure + "!";
+                printMessage = "\nYou found " + treasure + "!";
             } else {
-                printMessage = "You have already found a " + treasure;
+                printMessage = "\nYou have already found a " + treasure;
             }
         }
     }
 
     public String infoString() {
-        return "This nice little town is surrounded by " + terrain.getTerrainName() + ".";
+        return "\nThis nice little town is surrounded by " + terrain.getTerrainName() + ".";
     }
 
     /**
