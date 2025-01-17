@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.Scanner;
+import java.util.spi.AbstractResourceBundleProvider;
 
 /**
  * The Shop class controls the cost of the items in the Treasure Hunt game. <p>
@@ -53,14 +54,21 @@ public class Shop {
             int cost = checkMarketPrice(item, true);
             if (cost == 0 && !customer.getHunterSamuraiMode())  {
                 window.addTextToWindow("\nWe ain't got none of those.", Color.black);
+            } else if (cost == 0 && !item.equals("sword")) {
+                window.addTextToWindow("\nWe ain't got none of those.", Color.black);
             } else {
                 window.addTextToWindow("\nIt'll cost you " + cost + " gold. Buy it (y/n)? " , Color.black);
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
-                    if (customer.getHunterSamuraiMode()) {
+                    if (customer.hasItemInKit("sword") && item.equals("boots")){
+                        window.addTextToWindow("\nThe sword's aura scared the shopkeeper and he gives you the item for free.", Color.black);
+                        customer.addItem("boots");
+                    }else if (customer.hasItemInKit("sword")) {
                         window.addTextToWindow("\nThe sword's aura scared the shopkeeper and he gives you the item for free.", Color.black);
                     }
-                    buyItem(item);
+                    if (!(customer.hasItemInKit("sword") && item.equals("boots"))){
+                        buyItem(item);
+                    }
                 }
             }
         } else {
@@ -88,7 +96,7 @@ public class Shop {
      * @return the string representing the shop's items available for purchase and their prices.
      */
     public String inventory() {
-        String str = "Water: " + WATER_COST + " gold\n";
+        String str = "\nWater: " + WATER_COST + " gold\n";
         str += "Rope: " + ROPE_COST + " gold\n";
         str += "Machete: " + MACHETE_COST + " gold\n";
         str += "Horse: " + HORSE_COST + " gold\n";

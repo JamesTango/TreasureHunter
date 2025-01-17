@@ -77,7 +77,7 @@ public class TreasureHunter {
             hunter = new Hunter(name, 40,samuraiMode, window);
         } else if (hard.equals("s")){
             samuraiMode = true;
-            hunter = new Hunter(name,40,samuraiMode, window);
+            hunter = new Hunter(name,20,samuraiMode, window);
         } else {
             hunter = new Hunter(name, 20,samuraiMode, window);
         }
